@@ -1,9 +1,9 @@
 {
-  "name": "greeter-bot",
+  "name": "gianni-bot",
   "version": "1.0.0",
-  "description": "Discord test bot",
+  "description": "Wild Goose Chase!!",
   "main": "bot.js",
-  "author": "Justin_Chudley",
+  "author": "Gianni",
   "dependencies": {
     "discord.io": "^2.5.3",
     "winston": "^2.4.0"
