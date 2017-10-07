@@ -32,7 +32,7 @@ let points = JSON.parse(fs.readFileSync("./tracker.json", "utf8"));
 const startTime = new Date(); // Server start time
 const spawnTime = new Date();
 
-spawnTime.setMinutes(startTime.getMinutes() + 2); // 2 minutes after server launch
+// spawnTime.setMinutes(startTime.getMinutes() + 2); // 2 minutes after server launch
 
 const offset = 1; // Notification will be sent this many minutes before the target time
 var stop = false;
@@ -57,7 +57,7 @@ setInterval(function() {
             }
         }
     }
-}, 60 * 1000); // Check every minute
+}, 5 * 1000); // Check every minute
 
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Our bot needs to know if it will execute a command
@@ -72,12 +72,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             case 'take':
                 if (spawned)
                 {
-                    addPoints(userID, 1);
+                    var d = new Date();
+                    if (!points[userID])
+                    {
+                        points[userID] = {points: 0};
+                    }
+                    
+                    points[userID].points++;
+
                     bot.sendMessage({
                         to: '365929907655802882',
-                        message: "You snag the golden egg! You now have 1 egg."
+                        message: `You snag the golden egg! You now have ${points[userID].points} egg.`
                     });
                     spawnTime.setMinutes(d.getMinutes() + 2);  
+                    spawned = false;
+                    updateJSON();
                 } else {
                     bot.sendMessage({
                         to: '365929907655802882',
@@ -106,8 +115,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: `${userID} you have ${points[userID].points} points`
                 });
+                break;
             case 'gain':
-                addPoints(userID, 1);
+                addPoints(userID);
                 break;
          }
      }
@@ -119,11 +129,13 @@ function checkPoints(usr) {
         points[usr] = {points: 0};
         updateJSON();
     }
+    console.log("called");
 }
 
-function addPoints(user, amnt) {
-    checkPoints(user);
-    points[user].points += amnt;
+function addPoints(useri) {
+    checkPoints(useri);
+    points[useri].points++;
+    console.log(JSON.stringify(points))
     updateJSON();
 }
 
