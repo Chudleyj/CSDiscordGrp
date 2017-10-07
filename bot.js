@@ -32,11 +32,13 @@ const spawnTime = new Date();
 
 // spawnTime.setMinutes(startTime.getMinutes() + 2); // 2 minutes after server launch
 
+const gameChannelID = '365929907655802882';
+
 const offset = 1; // Notification will be sent this many minutes before the target time
 let stop = false;
 let spawned = false;
 
-setInterval(() => {
+setInterval(() => {    
     if (!stop) {
         if (!spawned) {
             const d = new Date();
@@ -77,6 +79,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     const eggsMessage = `${userPoints} ${pluralize('egg', userPoints)}`;
 
                     bot.sendMessage({
+                        to: gameChannelID,
                         message: `You snag the golden egg! You now have ${eggsMessage}.`
                     });
 
@@ -84,7 +87,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     spawned = false;
                 } else {
                     bot.sendMessage({
-                        to: '365929907655802882',
+                        to: gameChannelID,
                         message: 'You stare into thin air, no prize awaits you.'
                     });
                 }
@@ -95,7 +98,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                 const t = spawnTime.getMinutes() - d.getMinutes();
 
                 bot.sendMessage({
-                    to: '365929907655802882',
+                    to: gameChannelID,
                     message: `${t} minutes until spawn. It will spawn at ${spawnTime.getMinutes()} Currently at ${d.getMinutes()}`
                 });
 
@@ -103,7 +106,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
             /*case 'stop':
                 stop = !stop;
                 bot.sendMessage({
-                    to: '365929907655802882',
+                    to: gameChannelID,
                     message: `stop =  ${stop}`
                 });
                 break;*/
@@ -122,16 +125,16 @@ bot.on('message', (user, userID, channelID, message, evt) => {
      }
 });
 
-const checkPoints = (userid) => {
-    if (!points[userid]) {
-        points[userid].points = 0;
+const checkPoints = (userID) => {
+    if (!points[userID]) {
+        points[userID] = { points: 0 };
         updateJSON();
     }
 };
 
-const addPoints = (userid, amount) => {
-    checkPoints(userid);
-    points[userid].points += amount;
+const addPoints = (userID, amount) => {
+    checkPoints(userID);
+    points[userID].points += amount;
     updateJSON();
 };
 
