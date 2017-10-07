@@ -1,8 +1,7 @@
-var Discord = require('discord.io');
-var logger = require('winston');
-var auth = require('./auth.json');
+const Discord = require('discord.io');
+const logger = require('winston');
+const auth = require('./auth.json');
 const fs = require("fs");
-
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -11,13 +10,11 @@ logger.add(logger.transports.Console, {
 });
 logger.level = 'debug';
 
-
 // Initialize Discord Bot
-var bot = new Discord.Client({
+let bot = new Discord.Client({
    token: auth.token,
    autorun: true
 });
-
 
 bot.on('ready', function () {
     logger.info('Connected');
@@ -35,13 +32,13 @@ const spawnTime = new Date();
 // spawnTime.setMinutes(startTime.getMinutes() + 2); // 2 minutes after server launch
 
 const offset = 1; // Notification will be sent this many minutes before the target time
-var stop = false;
-var spawned = false;
+let stop = false;
+let spawned = false;
 
 setInterval(() => {
     if (!stop) {
         if (!spawned) {
-            var d = new Date();
+            const d = new Date();
 
             if (d.getMinutes() < spawnTime.getMinutes() - offset) return;
 
@@ -62,8 +59,8 @@ bot.on('message', (user, userID, channelID, message, evt) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     if (message.substring(0, 1) === '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
+        let args = message.substring(1).split(' ');
+        const cmd = args[0];
        
         args = args.splice(1);
 
@@ -71,7 +68,7 @@ bot.on('message', (user, userID, channelID, message, evt) => {
             // !take
             case 'take':
                 if (spawned) {
-                    var d = new Date();
+                    const d = new Date();
                     
                     addPoints(userID, 1);
 
@@ -91,8 +88,8 @@ bot.on('message', (user, userID, channelID, message, evt) => {
 
                 break;
             case 'time':
-                var d = new Date();
-                var t = spawnTime.getMinutes() - d.getMinutes();
+                const d = new Date();
+                const t = spawnTime.getMinutes() - d.getMinutes();
 
                 bot.sendMessage({
                     to: '365929907655802882',
