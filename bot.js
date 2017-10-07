@@ -2,6 +2,7 @@ const Discord = require('discord.io');
 const logger = require('winston');
 const auth = require('./auth.json');
 const fs = require("fs");
+const pluralize = require('pluralize');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -72,9 +73,11 @@ bot.on('message', (user, userID, channelID, message, evt) => {
                     
                     addPoints(userID, 1);
 
+                    const userPoints = points[userID].points;
+                    const eggsMessage = `${userPoints} ${pluralize('egg', userPoints)}`;
+
                     bot.sendMessage({
-                        to: '365929907655802882',
-                        message: `You snag the golden egg! You now have ${points[userID].points} egg.`
+                        message: `You snag the golden egg! You now have ${eggsMessage}.`
                     });
 
                     spawnTime.setMinutes(d.getMinutes() + 2);  

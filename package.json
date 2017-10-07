@@ -6,6 +6,7 @@
   "author": "Gianni",
   "dependencies": {
     "discord.io": "^2.5.3",
+    "pluralize": "^7.0.0",
     "winston": "^2.4.0"
   },
   "devDependencies": {
