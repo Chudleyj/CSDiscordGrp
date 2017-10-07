@@ -38,15 +38,14 @@ const offset = 1; // Notification will be sent this many minutes before the targ
 var stop = false;
 var spawned = false;
 
-setInterval(function() {
-    if (!stop)
-    {
-        if (!spawned)
-        {
+setInterval(() => {
+    if (!stop) {
+        if (!spawned) {
             var d = new Date();
+
             if (d.getMinutes() < spawnTime.getMinutes() - offset) return;
-            if (d.getMinutes() === spawnTime.getMinutes() - offset)
-            {
+
+            if (d.getMinutes() === spawnTime.getMinutes() - offset) {
                 bot.sendMessage({
                     to: '365929907655802882',
                     message: 'An egg will appear in ' + offset + ' minute!'
@@ -59,48 +58,47 @@ setInterval(function() {
     }
 }, 5 * 1000); // Check every minute
 
-bot.on('message', function (user, userID, channelID, message, evt) {
+bot.on('message', (user, userID, channelID, message, evt) => {
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
+    if (message.substring(0, 1) === '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
        
         args = args.splice(1);
+
         switch(cmd) {
             // !take
             case 'take':
-                if (spawned)
-                {
+                if (spawned) {
                     var d = new Date();
-                    if (!points[userID])
-                    {
-                        points[userID] = {points: 0};
-                    }
                     
-                    points[userID].points++;
+                    addPoints(userID, 1);
 
                     bot.sendMessage({
                         to: '365929907655802882',
                         message: `You snag the golden egg! You now have ${points[userID].points} egg.`
                     });
+
                     spawnTime.setMinutes(d.getMinutes() + 2);  
                     spawned = false;
-                    updateJSON();
                 } else {
                     bot.sendMessage({
                         to: '365929907655802882',
                         message: 'You stare into thin air, no prize awaits you.'
                     });
                 }
+
                 break;
             case 'time':
                 var d = new Date();
                 var t = spawnTime.getMinutes() - d.getMinutes();
+
                 bot.sendMessage({
                     to: '365929907655802882',
                     message: `${t} minutes until spawn. It will spawn at ${spawnTime.getMinutes()} Currently at ${d.getMinutes()}`
                 });
+
                 break;
             /*case 'stop':
                 stop = !stop;
@@ -115,33 +113,33 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: `${userID} you have ${points[userID].points} points`
                 });
+
                 break;
             case 'gain':
-                addPoints(userID);
+                addPoints(userID, 1);
                 break;
          }
      }
 });
 
-function checkPoints(usr) {
-    if (!points[usr])
-    {
-        points[usr] = {points: 0};
+const checkPoints = (userid) => {
+    if (!points[userid]) {
+        points[userid].points = 0;
         updateJSON();
     }
-    console.log("called");
-}
+};
 
-function addPoints(useri) {
-    checkPoints(useri);
-    points[useri].points++;
-    console.log(JSON.stringify(points))
+const addPoints = (userid, amount) => {
+    checkPoints(userid);
+    points[userid].points += amount;
     updateJSON();
-}
+};
 
-function updateJSON() {
+const updateJSON = () => {
     // Save to JSON
-    fs.writeFile("./tracker.json", JSON.stringify(points), (err) => {
-        if (err) console.error(err)
-    });
-}
+    fs.writeFile("./tracker.json", JSON.stringify(points), 
+        (err) => {
+            if (err) console.error(err);
+        }
+    );
+};
