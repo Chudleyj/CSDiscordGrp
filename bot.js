@@ -23,9 +23,10 @@ var question_choice
 bot.on('message', function (user, userID, channelID, message, evt) {
 
     if (message.substring(0, 1) == '!') {
+        var ans = message.substring(1); //Question answer vars
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-        var ans = message.substring(1);
+        ans = ans.toLowerCase();
        args = args.splice(1);
 
        if(on == false){
@@ -38,10 +39,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
       else if(question_choice == 1){
         switch(ans){
-            case 'Pony Express':
-            case 'Pony express':
             case 'pony express':
-            case 'pony Express':
             bot.sendMessage({
               to: channelID,
               message: "Correct!"
@@ -62,7 +60,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
         else if(question_choice == 2){
           switch(cmd){
-              case 'Camel':
               case 'camel':
               bot.sendMessage({
                 to: channelID,
@@ -83,10 +80,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
           else if(question_choice == 3){
             switch(cmd){
-                case 'Vincent Van Gogh':
-                case 'Vincent Van gogh':
-                case 'Vincent van gogh':
-                case 'Vincent van Gogh':
                 case 'vincent van gogh':
                 bot.sendMessage({
                   to: channelID,
@@ -127,12 +120,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
               else if(question_choice == 5){
                 switch(cmd){
-                    case 'Liquid Crystal Display':
-                    case 'Liquid crystal display':
-                    case 'Liquid Crystal display':
-                    case 'Liquid crystal Display':
-                    case 'liquid Crystal Display':
-                    case 'liquid crystal Display':
                     case 'liquid crystal display':
                     bot.sendMessage({
                       to: channelID,
@@ -191,7 +178,15 @@ function get_Question(channelID){
         message: 'When referring to a computer monitor, what does the acronym LCD stand for?'
       });
     break;
-  }
+
+
+  case 5:
+    bot.sendMessage({
+      to: channelID,
+      message: 'When talking about computer memory, what does the acronym ROM stand for?'
+    });
+  break;
+}
   on = true
   return question_choice;
 }
