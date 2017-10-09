@@ -23,10 +23,9 @@ var question_choice
 bot.on('message', function (user, userID, channelID, message, evt) {
 
     if (message.substring(0, 1) == ';') {
-        var ans = message.substring(1); //Question answer vars
+        var ans = message.substring(1).toLowerCase();; //Question answer vars
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-        ans = ans.toLowerCase();
         args = args.splice(1);
 
         bot.sendMessage({
@@ -43,167 +42,153 @@ bot.on('message', function (user, userID, channelID, message, evt) {
       }
 
       else if(question_choice == 1){
-        switch(ans){
-            case 'pony express':
+         if(ans === 'pony express'){
             bot.sendMessage({
               to: channelID,
               message: "Correct!"
             })
             on = false;
-            break;
+          }
 
-
-            default:
+         else{
             bot.sendMessage({
               to: channelID,
               message: "Wrong!"
             })
             on = false;
-            break;
           }
         }
 
         else if(question_choice == 2){
-          switch(cmd){
+          if(ans === 'camel'){
               case 'camel':
               bot.sendMessage({
                 to: channelID,
                 message: "Correct!"
               })
               on = false;
-              break;
+            }
 
-              default:
+            else{
               bot.sendMessage({
                 to: channelID,
                 message: "Wrong!"
               })
               on = false;
-              break;
             }
           }
 
           else if(question_choice == 3){
-            switch(cmd){
+            if(ans === 'vincent van gogh'){
                 case 'vincent van gogh':
                 bot.sendMessage({
                   to: channelID,
                   message: "Correct!"
                 })
                 on = false;
-                break;
+              }
 
-                default:
+              else{
                 bot.sendMessage({
                   to: channelID,
                   message: "Wrong!"
                 })
                 on = false;
-                break;
               }
             }
 
             else if(question_choice == 4){
-              switch(cmd){
+              if(ans === '1990'){
                   case '1990':
                   bot.sendMessage({
                     to: channelID,
                     message: "Correct!"
                   })
                   on = false;
-                  break;
+                }
 
-                  default:
+                else{
                   bot.sendMessage({
                     to: channelID,
                     message: "Wrong!"
                   })
                   on = false;
-                  break;
                 }
               }
 
               else if(question_choice == 5){
-                switch(cmd){
-                    case 'liquid crystal display':
+                if(ans === 'liquid crystal display'){
                     bot.sendMessage({
                       to: channelID,
                       message: "Correct!"
                     })
                     on = false;
-                    break;
+                  }
 
-                    default:
+                else{
                     bot.sendMessage({
                       to: channelID,
                       message: "Wrong!"
                     })
                     on = false;
-                    break;
                   }
                 }
 
                 else if(question_choice == 6){
-                  switch(cmd){
-                      case 'read only memory':
+                  if(ans === 'read only memory'){
                       bot.sendMessage({
                         to: channelID,
                         message: "Correct!"
                       })
                       on = false;
-                      break;
+                    }
 
-                      default:
+                   else{
                       bot.sendMessage({
                         to: channelID,
                         message: "Wrong!"
                       })
                       on = false;
-                      break;
                     }
                   }
 
                   else if(question_choice == 7){
-                    switch(cmd){
-                        case 'kodak':
+                    if(ans === 'kodak'){
                         bot.sendMessage({
                           to: channelID,
                           message: "Correct!"
                         })
                         on = false;
-                        break;
+                      }
 
-                        default:
+                    else{
                         bot.sendMessage({
                           to: channelID,
                           message: "Wrong!"
                         })
                         on = false;
-                        break;
                       }
                     }
 
                     else if(question_choice == 8){
-                      switch(cmd){
+                      if(ans === '1993'){
                           case '1993':
                           bot.sendMessage({
                             to: channelID,
                             message: "Correct!"
                           })
                           on = false;
-                          break;
+                      }
 
-                          default:
+                      else{
                           bot.sendMessage({
                             to: channelID,
                             message: "Wrong!"
                           })
                           on = false;
-                          break;
                         }
                       }
     }//end if (message....)
-
 });// end function
 
 function get_Question(channelID){
