@@ -36,13 +36,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         }
       }
       else{
-        answer_Question(question_choice, channelID)
-        on = false
+        answer_Question(question_choice, channelID, ans)
       }
     }//end if (message....)
 });// end function
 
-function answer_Question(question_choice, channelID)
+function answer_Question(question_choice, channelID, ans)
 {
   if(question_choice == 1){
      if(ans === 'pony express'){
@@ -276,8 +275,8 @@ break;
 
   on = true
   return question_choice;
+  }
 }
-
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
