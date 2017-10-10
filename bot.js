@@ -18,8 +18,8 @@ bot.on('ready', function (evt, channelID) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 
-var on = false
-var question_choice
+var on = false;
+var question_choice;
 bot.on('message', function (user, userID, channelID, message, evt) {
 
     if (message.substring(0, 1) == ';') {
@@ -32,18 +32,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        switch(cmd){
           case 'start':
             get_Question(channelID);
+            console.log(question_choice)
+          return;
           break;
         }
       }
-      else{
+      else
+        conosle.log('ELSE HIT')
         answer_Question(question_choice, channelID, ans)
-      }
     }//end if (message....)
 });// end function
 
 function answer_Question(question_choice, channelID, ans)
 {
-  if(question_choice == 1){
+  console.log('ANSWER QUESTION')
+  if(question_choice === 1){
      if(ans === 'pony express'){
         bot.sendMessage({
           to: channelID,
@@ -61,7 +64,7 @@ function answer_Question(question_choice, channelID, ans)
       }
     }
 
-    else if(question_choice == 2){
+    else if(question_choice === 2){
       if(ans === 'camel'){
           bot.sendMessage({
             to: channelID,
@@ -79,7 +82,7 @@ function answer_Question(question_choice, channelID, ans)
         }
       }
 
-      else if(question_choice == 3){
+      else if(question_choice === 3){
         if(ans === 'vincent van gogh'){
             bot.sendMessage({
               to: channelID,
@@ -97,7 +100,7 @@ function answer_Question(question_choice, channelID, ans)
           }
         }
 
-        else if(question_choice == 4){
+        else if(question_choice === 4){
           if(ans === '1990'){
               bot.sendMessage({
                 to: channelID,
@@ -115,7 +118,7 @@ function answer_Question(question_choice, channelID, ans)
             }
           }
 
-          else if(question_choice == 5){
+          else if(question_choice === 5){
             if(ans === 'liquid crystal display'){
                 bot.sendMessage({
                   to: channelID,
@@ -133,7 +136,7 @@ function answer_Question(question_choice, channelID, ans)
               }
             }
 
-            else if(question_choice == 6){
+            else if(question_choice === 6){
               if(ans === 'read only memory'){
                   bot.sendMessage({
                     to: channelID,
@@ -151,7 +154,7 @@ function answer_Question(question_choice, channelID, ans)
                 }
               }
 
-              else if(question_choice == 7){
+              else if(question_choice === 7){
                 if(ans === 'kodak'){
                     bot.sendMessage({
                       to: channelID,
@@ -169,7 +172,7 @@ function answer_Question(question_choice, channelID, ans)
                   }
                 }
 
-                else if(question_choice == 8){
+                else if(question_choice === 8){
                   if(ans === '1993'){
                       bot.sendMessage({
                         to: channelID,
@@ -186,7 +189,7 @@ function answer_Question(question_choice, channelID, ans)
                       on = false;
                     }
                   }
-                  else if(question_choice == 9){
+                  else if(question_choice === 9){
                     if(ans === '1976'){
                         bot.sendMessage({
                           to: channelID,
