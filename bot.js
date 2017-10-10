@@ -23,15 +23,10 @@ var question_choice
 bot.on('message', function (user, userID, channelID, message, evt) {
 
     if (message.substring(0, 1) == ';') {
-        var ans = message.substring(1).toLowerCase();; //Question answer vars
+        var ans = message.substring(1).toLowerCase(); //Question answer vars
         var args = message.substring(1).split(' ');
         var cmd = args[0];
         args = args.splice(1);
-
-        bot.sendMessage({
-          to: channelID,
-          message: ans
-        })
 
        if(on == false){
        switch(cmd){
@@ -40,9 +35,53 @@ bot.on('message', function (user, userID, channelID, message, evt) {
           break;
         }
       }
+      else{
+        answer_Question(question_choice, channelID)
+        on = false
+      }
+    }//end if (message....)
+});// end function
 
-      else if(question_choice == 1){
-         if(ans === 'pony express'){
+function answer_Question(question_choice, channelID)
+{
+  if(question_choice == 1){
+     if(ans === 'pony express'){
+        bot.sendMessage({
+          to: channelID,
+          message: "Correct!"
+        })
+        on = false;
+      }
+
+     else{
+        bot.sendMessage({
+          to: channelID,
+          message: "Wrong!"
+        })
+        on = false;
+      }
+    }
+
+    else if(question_choice == 2){
+      if(ans === 'camel'){
+          bot.sendMessage({
+            to: channelID,
+            message: "Correct!"
+          })
+          on = false;
+        }
+
+        else{
+          bot.sendMessage({
+            to: channelID,
+            message: "Wrong!"
+          })
+          on = false;
+        }
+      }
+
+      else if(question_choice == 3){
+        if(ans === 'vincent van gogh'){
             bot.sendMessage({
               to: channelID,
               message: "Correct!"
@@ -50,7 +89,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             on = false;
           }
 
-         else{
+          else{
             bot.sendMessage({
               to: channelID,
               message: "Wrong!"
@@ -59,9 +98,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
           }
         }
 
-        else if(question_choice == 2){
-          if(ans === 'camel'){
-              case 'camel':
+        else if(question_choice == 4){
+          if(ans === '1990'){
               bot.sendMessage({
                 to: channelID,
                 message: "Correct!"
@@ -78,9 +116,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             }
           }
 
-          else if(question_choice == 3){
-            if(ans === 'vincent van gogh'){
-                case 'vincent van gogh':
+          else if(question_choice == 5){
+            if(ans === 'liquid crystal display'){
                 bot.sendMessage({
                   to: channelID,
                   message: "Correct!"
@@ -88,7 +125,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 on = false;
               }
 
-              else{
+            else{
                 bot.sendMessage({
                   to: channelID,
                   message: "Wrong!"
@@ -97,9 +134,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
               }
             }
 
-            else if(question_choice == 4){
-              if(ans === '1990'){
-                  case '1990':
+            else if(question_choice == 6){
+              if(ans === 'read only memory'){
                   bot.sendMessage({
                     to: channelID,
                     message: "Correct!"
@@ -107,7 +143,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                   on = false;
                 }
 
-                else{
+               else{
                   bot.sendMessage({
                     to: channelID,
                     message: "Wrong!"
@@ -116,8 +152,8 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 }
               }
 
-              else if(question_choice == 5){
-                if(ans === 'liquid crystal display'){
+              else if(question_choice == 7){
+                if(ans === 'kodak'){
                     bot.sendMessage({
                       to: channelID,
                       message: "Correct!"
@@ -134,16 +170,16 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                   }
                 }
 
-                else if(question_choice == 6){
-                  if(ans === 'read only memory'){
+                else if(question_choice == 8){
+                  if(ans === '1993'){
                       bot.sendMessage({
                         to: channelID,
                         message: "Correct!"
                       })
                       on = false;
-                    }
+                  }
 
-                   else{
+                  else{
                       bot.sendMessage({
                         to: channelID,
                         message: "Wrong!"
@@ -151,48 +187,27 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                       on = false;
                     }
                   }
-
-                  else if(question_choice == 7){
-                    if(ans === 'kodak'){
+                  else if(question_choice == 9){
+                    if(ans === '1976'){
                         bot.sendMessage({
                           to: channelID,
                           message: "Correct!"
                         })
                         on = false;
-                      }
-
-                    else{
-                        bot.sendMessage({
-                          to: channelID,
-                          message: "Wrong!"
-                        })
-                        on = false;
-                      }
                     }
 
-                    else if(question_choice == 8){
-                      if(ans === '1993'){
-                          case '1993':
-                          bot.sendMessage({
-                            to: channelID,
-                            message: "Correct!"
-                          })
-                          on = false;
-                      }
-
-                      else{
-                          bot.sendMessage({
-                            to: channelID,
-                            message: "Wrong!"
-                          })
-                          on = false;
-                        }
-                      }
-    }//end if (message....)
-});// end function
+                  else{
+                      bot.sendMessage({
+                        to: channelID,
+                        message: "Wrong!"
+                      })
+                      on = false;
+                    }
+                  }
+                }
 
 function get_Question(channelID){
-  question_choice = getRandomInt(1,9)
+  question_choice = getRandomInt(1,11)
   switch(question_choice){
     case 1:
       bot.sendMessage({
@@ -250,7 +265,15 @@ function get_Question(channelID){
       message: 'The first person shooter video game Doom was first released in what year?'
     });
   break;
-}
+
+
+case 9:
+  bot.sendMessage({
+    to: channelID,
+    message: 'In what year was the first Apple computer released?'
+  });
+break;
+
   on = true
   return question_choice;
 }
