@@ -32,14 +32,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        switch(cmd){
           case 'start':
             get_Question(channelID);
-            console.log(question_choice)
+            console.log(question_choice);
           return;
           break;
         }
       }
-      else
-        conosle.log('ELSE HIT')
-        answer_Question(question_choice, channelID, ans)
+        answer_Question(question_choice, channelID, ans);
     }//end if (message....)
 });// end function
 
@@ -51,7 +49,7 @@ function answer_Question(question_choice, channelID, ans)
         bot.sendMessage({
           to: channelID,
           message: "Correct!"
-        })
+        });
         on = false;
       }
 
@@ -59,7 +57,7 @@ function answer_Question(question_choice, channelID, ans)
         bot.sendMessage({
           to: channelID,
           message: "Wrong!"
-        })
+        });
         on = false;
       }
     }
@@ -69,7 +67,7 @@ function answer_Question(question_choice, channelID, ans)
           bot.sendMessage({
             to: channelID,
             message: "Correct!"
-          })
+          });
           on = false;
         }
 
@@ -77,7 +75,7 @@ function answer_Question(question_choice, channelID, ans)
           bot.sendMessage({
             to: channelID,
             message: "Wrong!"
-          })
+          });
           on = false;
         }
       }
@@ -87,7 +85,7 @@ function answer_Question(question_choice, channelID, ans)
             bot.sendMessage({
               to: channelID,
               message: "Correct!"
-            })
+            });
             on = false;
           }
 
@@ -95,7 +93,7 @@ function answer_Question(question_choice, channelID, ans)
             bot.sendMessage({
               to: channelID,
               message: "Wrong!"
-            })
+            });
             on = false;
           }
         }
@@ -105,7 +103,7 @@ function answer_Question(question_choice, channelID, ans)
               bot.sendMessage({
                 to: channelID,
                 message: "Correct!"
-              })
+              });
               on = false;
             }
 
@@ -113,7 +111,7 @@ function answer_Question(question_choice, channelID, ans)
               bot.sendMessage({
                 to: channelID,
                 message: "Wrong!"
-              })
+              });
               on = false;
             }
           }
@@ -123,7 +121,7 @@ function answer_Question(question_choice, channelID, ans)
                 bot.sendMessage({
                   to: channelID,
                   message: "Correct!"
-                })
+                });
                 on = false;
               }
 
@@ -131,7 +129,7 @@ function answer_Question(question_choice, channelID, ans)
                 bot.sendMessage({
                   to: channelID,
                   message: "Wrong!"
-                })
+                });
                 on = false;
               }
             }
@@ -141,7 +139,7 @@ function answer_Question(question_choice, channelID, ans)
                   bot.sendMessage({
                     to: channelID,
                     message: "Correct!"
-                  })
+                  });
                   on = false;
                 }
 
@@ -149,7 +147,7 @@ function answer_Question(question_choice, channelID, ans)
                   bot.sendMessage({
                     to: channelID,
                     message: "Wrong!"
-                  })
+                  });
                   on = false;
                 }
               }
@@ -159,7 +157,7 @@ function answer_Question(question_choice, channelID, ans)
                     bot.sendMessage({
                       to: channelID,
                       message: "Correct!"
-                    })
+                    });
                     on = false;
                   }
 
@@ -167,7 +165,7 @@ function answer_Question(question_choice, channelID, ans)
                     bot.sendMessage({
                       to: channelID,
                       message: "Wrong!"
-                    })
+                    });
                     on = false;
                   }
                 }
@@ -177,7 +175,7 @@ function answer_Question(question_choice, channelID, ans)
                       bot.sendMessage({
                         to: channelID,
                         message: "Correct!"
-                      })
+                      });
                       on = false;
                   }
 
@@ -185,7 +183,7 @@ function answer_Question(question_choice, channelID, ans)
                       bot.sendMessage({
                         to: channelID,
                         message: "Wrong!"
-                      })
+                      });
                       on = false;
                     }
                   }
@@ -194,7 +192,7 @@ function answer_Question(question_choice, channelID, ans)
                         bot.sendMessage({
                           to: channelID,
                           message: "Correct!"
-                        })
+                        });
                         on = false;
                     }
 
@@ -202,7 +200,7 @@ function answer_Question(question_choice, channelID, ans)
                       bot.sendMessage({
                         to: channelID,
                         message: "Wrong!"
-                      })
+                      });
                       on = false;
                     }
                   }
@@ -276,7 +274,7 @@ case 9:
   });
 break;
 
-  on = true
+  on = true;
   return question_choice;
   }
 }
