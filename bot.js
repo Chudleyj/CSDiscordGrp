@@ -1,6 +1,7 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
+var questions_file = require('./get_questions.js');
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -20,6 +21,7 @@ bot.on('ready', function (evt, channelID) {
 
 var on = false;
 var question_choice;
+var obj = new questions_file.get_questions()
 bot.on('message', function (user, userID, channelID, message, evt) {
 
     if (message.substring(0, 1) == ';') {
@@ -31,7 +33,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        if(on == false){
        switch(cmd){
           case 'start':
-            get_Question(channelID);
+            q.get_Question(channelID);
             console.log(question_choice);
           return;
           break;
@@ -204,80 +206,80 @@ function answer_Question(question_choice, channelID, ans)
                       on = false;
                     }
                   }
+
+                  else if(question_choice === 10){
+                    if(ans === 'world wide web'){
+                        bot.sendMessage({
+                          to: channelID,
+                          message: "Correct!"
+                        });
+                        on = false;
+                    }
+
+                  else{
+                      bot.sendMessage({
+                        to: channelID,
+                        message: "Wrong!"
+                      });
+                      on = false;
+                    }
+                  }
+
+                  else if(question_choice === 11){
+                    if(ans === '1985'){
+                        bot.sendMessage({
+                          to: channelID,
+                          message: "Correct!"
+                        });
+                        on = false;
+                    }
+
+                  else{
+                      bot.sendMessage({
+                        to: channelID,
+                        message: "Wrong!"
+                      });
+                      on = false;
+                    }
+                  }
+
+                  else if(question_choice === 12){
+                    if(ans === 'Voyager 1'){
+                        bot.sendMessage({
+                          to: channelID,
+                          message: "Correct!"
+                        });
+                        on = false;
+                    }
+
+                  else{
+                      bot.sendMessage({
+                        to: channelID,
+                        message: "Wrong!"
+                      });
+                      on = false;
+                    }
+                  }
+
+                  else if(question_choice === 13){
+                    if(ans === 'Samuel Morse'){
+                        bot.sendMessage({
+                          to: channelID,
+                          message: "Correct!"
+                        });
+                        on = false;
+                    }
+
+                  else{
+                      bot.sendMessage({
+                        to: channelID,
+                        message: "Wrong!"
+                      });
+                      on = false;
+                    }
+                  }
                 }
 
-function get_Question(channelID){
-  question_choice = getRandomInt(1,11)
-  switch(question_choice){
-    case 1:
-      bot.sendMessage({
-        to: channelID,
-        message: 'What was the name of the U.S. mail service, started in 1860, that used horses and riders?'
-      });
-    break;
-
-    case 2:
-      bot.sendMessage({
-        to: channelID,
-        message: 'What type of animal is known as the ship of the desert?'
-      });
-    break;
-
-    case 3:
-      bot.sendMessage({
-        to: channelID,
-        message: 'The Starry Night is an oil on canvas painted by which post-impressionist painter?'
-      });
-    break;
-
-    case 4:
-      bot.sendMessage({
-        to: channelID,
-        message: 'CERN launched the very first website in what year?'
-      });
-    break;
-
-    case 5:
-      bot.sendMessage({
-        to: channelID,
-        message: 'When referring to a computer monitor, what does the acronym LCD stand for?'
-      });
-    break;
-
-
-  case 6:
-    bot.sendMessage({
-      to: channelID,
-      message: 'When talking about computer memory, what does the acronym ROM stand for?'
-    });
-  break;
-
-  case 7:
-    bot.sendMessage({
-      to: channelID,
-      message: 'In 1975 an engineer created the first electronic camera while working for what company?'
-    });
-  break;
-
-  case 8:
-    bot.sendMessage({
-      to: channelID,
-      message: 'The first person shooter video game Doom was first released in what year?'
-    });
-  break;
-
-
-case 9:
-  bot.sendMessage({
-    to: channelID,
-    message: 'In what year was the first Apple computer released?'
-  });
-break;
-
-  on = true;
-  return question_choice;
-  }
-}
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
